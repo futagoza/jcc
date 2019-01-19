@@ -1,0 +1,49 @@
+name: $(BuildID)
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+variables:
+- group: 'env-variables'
+
+strategy:
+  maxParallel: 3
+  matrix:
+    Node 8:
+      node_version: 8.x
+    Node 10:
+      node_version: 10.x
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: $(node_version)
+  displayName: 'Install Node.js'
+
+- script: |
+    yarn install
+  displayName: 'Install dependencies'
+
+- script: |
+    yarn lint
+    yarn test
+    yarn coverage
+  displayName: 'eslint > mocha > codecov.io'
+  env:
+    CODECOV_TOKEN: $(CODECOV_TOKEN)
+    GIT_BRANCH: $(Build.SourceBranch)
+    GIT_COMMIT_SHA: $(Build.SourceVersion)
+
+- task: PublishTestResults@2
+  displayName: 'Publish test results (Azure Pipelines)'
+  condition: succeededOrFailed()
+  inputs:
+    testRunner: JUnit
+    testResultsFiles: 'test/junit-results.xml'
+
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage results (Azure Pipelines)'
+  inputs: 
+    codeCoverageTool: Cobertura
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/coverage/lcov-report'
