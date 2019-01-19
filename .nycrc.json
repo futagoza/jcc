@@ -1,4 +1,5 @@
 {
+    "all": true,
     "cache": true,
     "exclude": [
         "**/node_modules/**",
