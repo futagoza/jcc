@@ -1,0 +1,30 @@
+{
+    "name": "@futagoza/jcc",
+    "private": true,
+    "workspaces": [
+        "packages/*",
+        "test"
+    ],
+    "scripts": {
+        "build": "webpack",
+        "clean": "rimraf packages/jcc/*.js coverage .nyc_output test/junit-results.xml",
+        "lint": "eslint .",
+        "test": "nyc mocha --recursive",
+        "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
+    },
+    "dependencies": {
+        "codecov": "3.1.0",
+        "eslint": "5.12.0",
+        "eslint-config-futagozaryuu": "5.6.0",
+        "mocha": "5.2.0",
+        "mocha-junit-reporter": "1.18.0",
+        "mocha-multi-reporters": "1.1.7",
+        "nyc": "13.1.0",
+        "rimraf": "2.6.3",
+        "webpack": "4.28.4",
+        "webpack-cli": "3.2.1"
+    },
+    "engines": {
+        "node": ">= 8"
+    }
+}

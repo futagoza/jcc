@@ -1,0 +1,9 @@
+{
+    "name": "@jcc/js-parser",
+    "version": "0.1.0-alpha.0",
+    "private": true,
+    "main": "index.js",
+    "dependencies": {
+        "cherow": "~1.6.0"
+    }
+}

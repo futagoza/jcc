@@ -1,0 +1,17 @@
+{
+    "name": "jcc",
+    "version": "0.1.0-alpha.0",
+    "description": "A JavaScript bundler",
+    "keywords": [
+        "javascript",
+        "bundler"
+    ],
+    "repository": "futagoza/jcc",
+    "license": "MIT",
+    "author": "Futago-za Ryuu <futagoza.ryuu@gmail.com>",
+    "main": "core.js",
+    "bin": "bin/jcc",
+    "engines": {
+        "node": ">= 8"
+    }
+}
